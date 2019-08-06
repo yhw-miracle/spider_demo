@@ -6,3 +6,5 @@
 
 ## 面向对象
 * [qiushi_text](object/qiushi/text/qiushi_text.py)
+
+* [qiushi_pic](object/qiushi/pic/qiushi_pic.py)
