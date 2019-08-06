@@ -84,7 +84,7 @@ class QiuShi(object):
             article_data, next_url = self.parse_data(response_data)
 
             if article_data:
-                self.save_data(article_data, "article.md")
+                self.save_data(article_data, "./data/article.md")
 
 
 if __name__ == '__main__':
