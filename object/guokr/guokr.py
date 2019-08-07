@@ -52,6 +52,8 @@ class Guokrspider(object):
         :param url:
         :return:
         """
+        resposne = requests.get(url, headers = self.headers)
+        return resposne.content.decode("utf-8")
 
     def parser_data(self, data, page_num):
         """
