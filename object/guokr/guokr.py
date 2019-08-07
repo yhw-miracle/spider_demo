@@ -33,3 +33,44 @@ answer_nums: //ul[@class="ask-list-cp"]/li//p[contains(@class,"answer-nums")]/sp
     ]
 }
 """
+import requests
+from lxml import etree
+import json
+import time
+
+
+class Guokrspider(object):
+    def __init__(self):
+        pass
+
+    def request_data(self, url):
+        """
+
+        :param url:
+        :return:
+        """
+
+    def parser_data(self, data, page_num):
+        """
+
+        :param data:
+        :param page_num:
+        :return:
+        """
+
+    def save_data(self, f = None, t = "temp.md"):
+        """
+
+        :param data:
+        :return:
+        """
+
+    def run(self):
+        """
+
+        :return:
+        """
+
+
+if __name__ == '__main__':
+    Guokrspider().run()
