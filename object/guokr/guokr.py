@@ -99,6 +99,9 @@ class Guokrspider(object):
         :param data:
         :return:
         """
+        for i in f:
+            with open(t, "a", encoding = "utf-8") as file:
+                file.write(json.dumps(i, ensure_ascii = False) + "\n")
 
     def run(self):
         """
