@@ -108,6 +108,26 @@ class Guokrspider(object):
 
         :return:
         """
+        next_url = self.base_url
+        page_num = 1
+
+        while True:
+            if next_url is None:
+                break
+
+            print("正在爬取第 {} 页数据...".format(page_num))
+
+            response_data = self.request_data(next_url)
+            print("--->" + str(len(response_data)))
+            if len(response_data) < 10000:
+                print(response_data)
+
+            detail_page, next_url = self.parser_data(response_data, page_num)
+
+            self.save_data(f = detail_page, t = "guokr.json")
+
+            page_num += 1
+            time.sleep(3)
 
 
 if __name__ == '__main__':
