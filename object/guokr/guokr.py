@@ -62,6 +62,36 @@ class Guokrspider(object):
         :param page_num:
         :return:
         """
+        etree_to_result = etree.HTML(data)
+        detail_list = etree_to_result.xpath('//ul[@class="ask-list-cp"]/li')
+
+        detail_page = list()
+        if len(detail_list) > 0:
+            for index, detail in enumerate(detail_list):
+                print(">>>正在爬取第 {} 页中第 {} 个数据...".format(page_num, index + 1))
+                detail_data = dict()
+
+                title = detail.xpath('.//h2/a/text()')
+                title_url = detail.xpath('.//h2/a/@href')
+                summary = detail.xpath('.//p[contains(@class, "summary")]/text()')
+                tag = detail.xpath('.//p[@class="tags"]/a/text()')
+                focus_nums = detail.xpath('.//p[contains(@class,"focus-nums")]/span/text()')
+                answer_nums = detail.xpath('.//p[contains(@class,"answer-nums")]/span/text()')
+
+                detail_data["title"] = title[0] if len(title) > 0 else None
+                detail_data["title_url"] = title_url[0] if len(title_url) > 0 else None
+                detail_data["summary"] = summary[0] if len(summary) > 0 else None
+                detail_data["tag"] = tag if len(tag) > 0 else None
+                detail_data["focus_nums"] = focus_nums[0] if len(focus_nums) > 0 else None
+                detail_data["answer_nums"] = answer_nums[0] if len(answer_nums) > 0 else None
+
+                detail_page.append(detail_data)
+
+        next_url = etree_to_result.xpath('//a[text()="下一页"]/@href')
+
+        next_url = "https://www.guokr.com" + next_url[0] if len(next_url) > 0 else None
+
+        return detail_page, next_url
 
     def save_data(self, f = None, t = "temp.md"):
         """
