@@ -41,7 +41,10 @@ import time
 
 class Guokrspider(object):
     def __init__(self):
-        pass
+        self.headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
+        }
+        self.base_url = "https://www.guokr.com/ask/highlight"
 
     def request_data(self, url):
         """
