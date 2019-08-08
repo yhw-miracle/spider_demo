@@ -97,6 +97,10 @@ class JinseSpider(object):
         :param t:
         :return:
         """
+        for i in f:
+            with open(t, "a", encoding = "utf-8") as file:
+                json.dump(i, fp = file, ensure_ascii = False, indent = 4)
+                file.write("\n")
 
     def run(self):
         """
