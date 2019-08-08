@@ -34,5 +34,5 @@ if __name__ == '__main__':
 
     # -----------------------------------------------------------------------
     # print 输出重定向
-    with open("temp.log", "a", encoding = "utf-8") as file:
-        print("111", file = file)
+    # with open("temp.log", "a", encoding = "utf-8") as file:
+    #     print("111", file = file)
