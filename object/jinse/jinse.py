@@ -107,6 +107,44 @@ class JinseSpider(object):
         运行爬虫
         :return:
         """
+        for i in self.data_type:
+            page_num = 1
+
+            print(i)
+            requesting_url = self.base_url
+            requesting_url = requesting_url.format(i)
+            self.new_urls.add(requesting_url)
+
+            while True:
+                with open("jinse.log", "a", encoding = "utf-8") as file:
+                    print(len(self.new_urls), len(self.old_urls), file = file)
+                    print(self.new_urls, file = file)
+                    print(self.old_urls, file = file)
+
+                if requesting_url is None or len(self.new_urls) == 0:
+                    break
+
+                with open("jinse.log", "a", encoding = "utf-8") as file:
+                    print("正在爬取 {} 第 {} 页数据...(from {})".format(i, page_num, requesting_url), file = file)
+                print("正在爬取 {} 第 {} 页数据...(from {})".format(i, page_num, requesting_url))
+
+                if requesting_url in self.new_urls and requesting_url not in self.old_urls:
+                    response_data = self.request_data(requesting_url)
+
+                    news_data, next_url = self.parser_data(response_data, i)
+                    if next_url not in self.old_urls and next_url not in self.new_urls:
+                        self.new_urls.add(next_url)
+
+                    self.save_data(f = news_data, t = "jinse/" + i + ".json")
+
+                    self.new_urls.remove(requesting_url)
+                    self.old_urls.add(requesting_url)
+                    requesting_url = next_url
+
+                    page_num += 1
+                    time.sleep(1)
+
+            self.save_url(i)
 
 
 if __name__ == '__main__':
