@@ -5,6 +5,7 @@
 # @File: demo.py
 # @Software: PyCharm
 import time
+import json
 
 
 if __name__ == '__main__':
@@ -19,3 +20,14 @@ if __name__ == '__main__':
 
     d = {"status_code": 500}
     print("status_code" in d.keys())
+
+    # -----------------------------------------------------------------------
+
+    d = {
+        "id": 495051,
+        "extra": {
+            "child_id": 423605,
+        }
+    }
+    with open("demo.json", "a", encoding = "utf-8") as file:
+        json.dump(d, file, ensure_ascii = False, indent = 4)
