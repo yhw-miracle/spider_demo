@@ -23,6 +23,8 @@ class JinseSpider(object):
         :param url:
         :return:
         """
+        response = requests.get(url, headers = self.headers)
+        return response.content.decode("utf-8")
 
     def parser_data(self, data, data_type):
         """
