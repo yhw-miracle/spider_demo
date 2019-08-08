@@ -15,11 +15,11 @@ if __name__ == '__main__':
 
     # -----------------------------------------------------------------------
     # 字典操作
-    d = {"1": {"2": 3}}
-    print(d.get("1").get("2"))
-
-    d = {"status_code": 500}
-    print("status_code" in d.keys())
+    # d = {"1": {"2": 3}}
+    # print(d.get("1").get("2"))
+    #
+    # d = {"status_code": 500}
+    # print("status_code" in d.keys())
 
     # -----------------------------------------------------------------------
     # json 方法使用
@@ -36,3 +36,12 @@ if __name__ == '__main__':
     # print 输出重定向
     # with open("temp.log", "a", encoding = "utf-8") as file:
     #     print("111", file = file)
+
+    # -----------------------------------------------------------------------
+    # os 模块练习
+    import os
+
+    # os.makedirs("jinse_data/data")
+
+    # print(os.listdir("."))
+    # print("jinse_data" in os.listdir("."))

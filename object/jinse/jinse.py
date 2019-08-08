@@ -7,6 +7,7 @@
 import time
 import requests
 import json
+import os
 
 
 class JinseSpider(object):
@@ -15,7 +16,17 @@ class JinseSpider(object):
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
         }
 
+        # 基本 url，需拼接 data_type
         self.base_url = "https://api.jinse.com/v6/information/list?catelogue_key={}&limit=50&information_id=0&flag=down&version=9.9.9"
+
+        # 不同分类
+        self.data_type = ["hot", "news", "zhengce", "TOR", "personage", "fenxishishuo", "capitalmarket", "tech", "baike"]
+
+        # 以爬取 url
+        self.old_urls = set()
+
+        # 未爬取 url
+        self.new_urls = set()
 
     def request_data(self, url):
         """
@@ -107,6 +118,9 @@ class JinseSpider(object):
         运行爬虫
         :return:
         """
+
+        os.makedirs("jinse_data")
+
         for i in self.data_type:
             page_num = 1
 
@@ -116,7 +130,7 @@ class JinseSpider(object):
             self.new_urls.add(requesting_url)
 
             while True:
-                with open("jinse.log", "a", encoding = "utf-8") as file:
+                with open("jinse_data/jinse.log", "a", encoding = "utf-8") as file:
                     print(len(self.new_urls), len(self.old_urls), file = file)
                     print(self.new_urls, file = file)
                     print(self.old_urls, file = file)
@@ -124,7 +138,7 @@ class JinseSpider(object):
                 if requesting_url is None or len(self.new_urls) == 0:
                     break
 
-                with open("jinse.log", "a", encoding = "utf-8") as file:
+                with open("jinse_data/jinse.log", "a", encoding = "utf-8") as file:
                     print("正在爬取 {} 第 {} 页数据...(from {})".format(i, page_num, requesting_url), file = file)
                 print("正在爬取 {} 第 {} 页数据...(from {})".format(i, page_num, requesting_url))
 
@@ -146,6 +160,20 @@ class JinseSpider(object):
 
             self.save_url(i)
 
+    def save_url(self, t = None):
+        """
+
+        :param t:
+        :return:
+        """
+        for i in self.new_urls:
+            with open("jinse/" + t + "_new_urls.md", "a", encoding = "utf-8") as file:
+                file.write("* [{}]({})".format(i, i) + "\n")
+
+        for i in self.old_urls:
+            print(i)
+            with open("jinse/" + t + "_old_urls.md", "a", encoding = "utf-8") as file:
+                file.write("* [{}]({})".format(i, i) + "\n")
 
 if __name__ == '__main__':
     JinseSpider().run()
