@@ -22,12 +22,17 @@ if __name__ == '__main__':
     print("status_code" in d.keys())
 
     # -----------------------------------------------------------------------
+    # json 方法使用
+    # d = {
+    #     "id": 495051,
+    #     "extra": {
+    #         "child_id": 423605,
+    #     }
+    # }
+    # with open("demo.json", "a", encoding = "utf-8") as file:
+    #     json.dump(d, file, ensure_ascii = False, indent = 4)
 
-    d = {
-        "id": 495051,
-        "extra": {
-            "child_id": 423605,
-        }
-    }
-    with open("demo.json", "a", encoding = "utf-8") as file:
-        json.dump(d, file, ensure_ascii = False, indent = 4)
+    # -----------------------------------------------------------------------
+    # print 输出重定向
+    with open("temp.log", "a", encoding = "utf-8") as file:
+        print("111", file = file)
