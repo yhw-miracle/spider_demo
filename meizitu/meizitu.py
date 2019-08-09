@@ -37,6 +37,8 @@ class MeiziSpiser(object):
         :param url:
         :return:
         """
+        response = requests.get(url, headers = self.headers)
+        return response.content
 
     def parser_data(self, data):
         """
@@ -92,6 +94,23 @@ class MeiziSpiser(object):
         :param t:
         :return:
         """
+        if "meizitu" not in os.listdir("."):
+            os.makedirs("meizitu")
+
+        if "images" not in os.listdir("./meizitu"):
+            os.makedirs("./meizitu/images")
+
+        t = "./meizitu/" + "data.json"
+        for i in f:
+            with open(t, "a", encoding = "utf-8") as file:
+                file.write(json.dumps(i, ensure_ascii = False) + "\n")
+            if i.get("image_src"):
+                print(i.get("image_src"))
+                print("图片下载中...")
+                # 获取图片名
+                image_name = i.get("image_src").split("/")[-1]
+                with open("./meizitu/images/" + image_name, "wb") as file:
+                    file.write(self.download_image(i.get("image_src")))
 
     def run(self):
         """
