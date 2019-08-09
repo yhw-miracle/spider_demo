@@ -28,6 +28,8 @@ class MeiziSpiser(object):
         :param data:
         :return:
         """
+        response = requests.post(url, headers = self.headers, data = data)
+        return response.content.decode("utf-8")
 
     def download_image(self, url):
         """
