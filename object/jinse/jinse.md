@@ -46,3 +46,12 @@
     "message": "The given data failed to pass validation.",
     "status_code": 500
 }
+
+* url 去重
+    * 反爬：重复数据
+
+* 爬虫速度
+
+* 爬虫需要有日志
+
+* 要有**逻辑**组织爬取的数据

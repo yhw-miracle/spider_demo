@@ -118,8 +118,11 @@ class JinseSpider(object):
         运行爬虫
         :return:
         """
+        if "jinse_data" not in os.listdir("."):
+            os.makedirs("jinse_data")
 
-        os.makedirs("jinse_data")
+        if "data" not in os.listdir("./jinse_data/"):
+            os.makedirs("./jinse_data/data")
 
         for i in self.data_type:
             page_num = 1
@@ -140,6 +143,7 @@ class JinseSpider(object):
 
                 with open("jinse_data/jinse.log", "a", encoding = "utf-8") as file:
                     print("正在爬取 {} 第 {} 页数据...(from {})".format(i, page_num, requesting_url), file = file)
+
                 print("正在爬取 {} 第 {} 页数据...(from {})".format(i, page_num, requesting_url))
 
                 if requesting_url in self.new_urls and requesting_url not in self.old_urls:
@@ -149,7 +153,7 @@ class JinseSpider(object):
                     if next_url not in self.old_urls and next_url not in self.new_urls:
                         self.new_urls.add(next_url)
 
-                    self.save_data(f = news_data, t = "jinse/" + i + ".json")
+                    self.save_data(f = news_data, t = "jinse_data/data/" + i + ".json")
 
                     self.new_urls.remove(requesting_url)
                     self.old_urls.add(requesting_url)
@@ -162,18 +166,15 @@ class JinseSpider(object):
 
     def save_url(self, t = None):
         """
-
+        保存以爬取链接
         :param t:
         :return:
         """
-        for i in self.new_urls:
-            with open("jinse/" + t + "_new_urls.md", "a", encoding = "utf-8") as file:
-                file.write("* [{}]({})".format(i, i) + "\n")
-
         for i in self.old_urls:
             print(i)
-            with open("jinse/" + t + "_old_urls.md", "a", encoding = "utf-8") as file:
+            with open("jinse_data/data/" + t + "_old_urls.md", "a", encoding = "utf-8") as file:
                 file.write("* [{}]({})".format(i, i) + "\n")
+
 
 if __name__ == '__main__':
     JinseSpider().run()
