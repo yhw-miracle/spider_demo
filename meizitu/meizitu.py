@@ -117,6 +117,26 @@ class MeiziSpiser(object):
         启动爬虫函数
         :return:
         """
+        page_num = 1
+        while True:
+            form_data = {
+                "type": "index",
+                "paged": page_num
+            }
+
+            print("正在爬取第 {} 页数据...".format(page_num))
+
+            response_data = self.request_data(self.base_url, data = form_data)
+
+            data = self.parser_data(response_data)
+
+            if data is None:
+                break
+
+            self.save_data(f = data, t = None)
+
+            time.sleep(1)
+            page_num += 1
 
 
 if __name__ == '__main__':
