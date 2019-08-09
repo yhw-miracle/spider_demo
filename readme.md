@@ -9,3 +9,5 @@
 * [qiushi_pic](qiushi/pic/qiushi_pic.py)
 
 * [guokr](guokr/guokr.py)
+
+* [jinse](jinse/jinse.py)
