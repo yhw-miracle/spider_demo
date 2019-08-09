@@ -44,6 +44,46 @@ class MeiziSpiser(object):
         :param data:
         :return:
         """
+        post_data = json.loads(data)["msg"]
+        if post_data == "":
+            return None
+
+        etree_to_result = etree.HTML(post_data)
+        post_list_div = etree_to_result.xpath('//div[contains(@class, "post-list")]')
+
+        post_list = list()
+        for post in post_list_div:
+            title_temp = post.xpath('.//a[@rel]/text()')
+            if len(title_temp) > 0:
+                title = title_temp
+            else:
+                continue
+
+            time_temp = post.xpath('.//time/@datetime')
+            time = title_temp if len(time_temp) > 0 else None
+
+            link_temp = post.xpath('.//a[@class="link-block"]/@href')
+            link = link_temp if len(link_temp) > 0 else None
+
+            image_src_temp = post.xpath('.//div[contains(@class,"preview")]/@style')
+
+            # (http|https)://.*.jpg
+
+            image_src = re.search(r'(http|https)://.*.jpg', image_src_temp[0])[0] if len(image_src_temp) > 0 else None
+
+            # if len(image_src_temp) > 0:
+            #     image_src = re.search(r'http://.*.jpg', image_src_temp[0])[0]
+            # else:
+            #     image_src = None
+
+            post_list.append({
+                "title": title,
+                "time": time,
+                "link": link,
+                "image_src": image_src
+            })
+
+        return post_list
 
     def save_data(self, f = None, t = None):
         """
