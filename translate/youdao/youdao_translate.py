@@ -74,6 +74,18 @@ class YoudaoTranslate(object):
         启动爬虫
         :return:
         """
+        word = "我是中国人"
+        ts, salt, sign = self.generate_ts_salt_sign(word)
+        self.form_data["i"] = word
+        self.form_data["ts"] = ts
+        self.form_data["salt"] = salt
+        self.form_data["sign"] = sign
+
+        print(self.form_data)
+
+        translate_result = self.request_data(self.translate_url, self.form_data)
+
+        print(translate_result)
 
 
 if __name__ == '__main__':
