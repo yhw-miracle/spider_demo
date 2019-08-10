@@ -11,3 +11,6 @@
 * [guokr](guokr/guokr.py)
 
 * [jinse](jinse/jinse.py)
+
+* [translate]
+    * [有道](http://fanyi.youdao.com)
