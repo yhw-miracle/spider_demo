@@ -59,6 +59,8 @@ class YoudaoTranslate(object):
         :param words:
         :return:
         """
+        response_data = requests.post(url, headers = self.headers, data = data)
+        return response_data.content.decode("utf-8")
 
     def parse_data(self, data):
         """
