@@ -43,6 +43,14 @@ class YoudaoTranslate(object):
         生成 ts、salt、sign 参数
         :return:
         """
+        ts = int(time.time() * 1000)
+
+        salt = str(ts) + str(random.randint(0, 9))
+
+        md5_object = hashlib.sha1()
+        md5_object.update(("fanyideskweb" + word + salt + "n%A-rKaT5fb[Gy?;N5@Tj").encode())
+        sign = md5_object.hexdigest()
+        return ts, salt, sign
 
     def request_data(self, url, data):
         """
