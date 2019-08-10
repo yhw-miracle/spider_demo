@@ -86,6 +86,10 @@ class YoudaoTranslate(object):
         translate_result = self.request_data(self.translate_url, self.form_data)
 
         print(translate_result)
+        """
+        {'i': '我是中国人', 'from': 'AUTO', 'to': 'AUTO', 'smartresult': 'dict', 'client': 'fanyideskweb', 'salt': '15654464503290', 'sign': 'ad0104c78f6f128083b21d5b85d483315342b1ee', 'ts': 1565446450329, 'bv': '7e3150ecbdf9de52dc355751b074cf60', 'doctype': 'json', 'version': '2.1', 'keyfrom': 'fanyi.web', 'action': 'FY_BY_REALTlME'}
+{"errorCode":50}
+        """
 
 
 if __name__ == '__main__':
