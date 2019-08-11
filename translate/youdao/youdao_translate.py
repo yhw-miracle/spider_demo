@@ -43,11 +43,11 @@ class YoudaoTranslate(object):
         生成 ts、salt、sign 参数
         :return:
         """
-        ts = int(time.time() * 1000)
+        ts = str(int(time.time() * 1000))
 
-        salt = str(ts) + str(random.randint(0, 9))
+        salt = ts + str(random.randint(0, 9))
 
-        md5_object = hashlib.sha1()
+        md5_object = hashlib.md5()
         md5_object.update(("fanyideskweb" + word + salt + "n%A-rKaT5fb[Gy?;N5@Tj").encode())
         sign = md5_object.hexdigest()
         return ts, salt, sign
@@ -68,29 +68,37 @@ class YoudaoTranslate(object):
         :param data:
         :return:
         """
+        if data:
+            data_dict = json.loads(data)
+            language_type = data_dict.get("type").split("2")
+            print(language_type[0] + ":" + language_type[1])
+            result = data_dict.get("translateResult")
+            for i in result:
+                print(i[0].get("src") + "<--->" + i[0].get("tgt"))
 
-    def run(self):
+    def run(self, translating_str):
         """
         启动爬虫
+        :param translating_str:
         :return:
         """
-        word = "我是中国人"
+        word = translating_str
         ts, salt, sign = self.generate_ts_salt_sign(word)
         self.form_data["i"] = word
         self.form_data["ts"] = ts
         self.form_data["salt"] = salt
         self.form_data["sign"] = sign
-
-        print(self.form_data)
+        # print(self.form_data)
 
         translate_result = self.request_data(self.translate_url, self.form_data)
+        # print(translate_result)
 
-        print(translate_result)
-        """
-        {'i': '我是中国人', 'from': 'AUTO', 'to': 'AUTO', 'smartresult': 'dict', 'client': 'fanyideskweb', 'salt': '15654464503290', 'sign': 'ad0104c78f6f128083b21d5b85d483315342b1ee', 'ts': 1565446450329, 'bv': '7e3150ecbdf9de52dc355751b074cf60', 'doctype': 'json', 'version': '2.1', 'keyfrom': 'fanyi.web', 'action': 'FY_BY_REALTlME'}
-{"errorCode":50}
-        """
+        self.parse_data(translate_result)
 
 
 if __name__ == '__main__':
-    YoudaoTranslate().run()
+    while True:
+        input_str = input("你想翻译什么(输入 q 退出。):")
+        if input_str == "q":
+            break
+        YoudaoTranslate().run(input_str)
