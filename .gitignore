@@ -3,3 +3,6 @@ object/qiushi/pic/data
 process/login_github/.env
 
 jinse/jinse_data
+
+scrapy_demo/scrapy_demo/__pycache__
+scrapy_demo/scrapy_demo/spiders/__pycache__
