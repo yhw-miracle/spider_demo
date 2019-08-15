@@ -6,6 +6,17 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+import random
+from .settings import USER_AGENT_LIST
+
+
+class DoubanSpiderDownloaderMiddleware(object):
+    def process_request(self, request, spider):
+        request.headers["User-Agent"] = random.choice(USER_AGENT_LIST)
+
+    def process_response(self, request, response, spider):
+        print(request.headers["User-Agent"])
+        return response
 
 
 class ScrapyDemoSpiderMiddleware(object):

@@ -6,3 +6,10 @@ jinse/jinse_data
 
 scrapy_demo/scrapy_demo/__pycache__
 scrapy_demo/scrapy_demo/spiders/__pycache__
+
+demo
+
+scrapy-redis
+
+scrapy_demo/data
+scrapy_demo/data1

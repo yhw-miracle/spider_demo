@@ -14,3 +14,17 @@ class ItcastTeacherItem(scrapy.Item):
     level = scrapy.Field()
     description = scrapy.Field()
     image = scrapy.Field()
+
+
+class DoubanMovieTop250Item(scrapy.Item):
+    """
+    豆瓣电影排行 250
+    """
+    name = scrapy.Field()
+    other_name = scrapy.Field()
+    image = scrapy.Field()
+    link = scrapy.Field()
+    info = scrapy.Field()
+    rating_num = scrapy.Field()
+    rating_people = scrapy.Field()
+    quote = scrapy.Field()
