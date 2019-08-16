@@ -8,15 +8,35 @@
 from scrapy import signals
 import random
 from .settings import USER_AGENT_LIST
+import base64
 
 
-class DoubanSpiderDownloaderMiddleware(object):
+class UserAgentDownloaderMiddleware(object):
+    """
+    随机 User-Agent
+    """
     def process_request(self, request, spider):
         request.headers["User-Agent"] = random.choice(USER_AGENT_LIST)
 
     def process_response(self, request, response, spider):
         print(request.headers["User-Agent"])
         return response
+
+
+class ProxyDownloaderMiddleware(object):
+    """
+    随机代理
+    """
+    def process_request(self, request, spider):
+        pass
+        # # 设置代理
+        # request.meta["proxy"] = ""
+        #
+        # # 设置认证
+        # request.headers["Proxy-Authorization"] = "Basic " + base64.b64decode("{user}" + ":" + "{}".format())
+
+    def process_response(self, request, response, spider):
+        pass
 
 
 class ScrapyDemoSpiderMiddleware(object):
