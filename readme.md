@@ -23,3 +23,4 @@ ___
     * [itcast_teacher](scrapy_demo/scrapy_demo/spiders/itcast.py)
     * [douban_movie](scrapy_demo/scrapy_demo/spiders/douban_movie.py)
     * [JD_books](scrapy_demo/scrapy_demo/spiders/jd_book.py)
+    * [kuaidaili_ip](scrapy_demo/scrapy_demo/spiders/kuaidaili_ip.py)
