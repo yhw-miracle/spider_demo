@@ -69,7 +69,9 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
     'scrapy_demo.pipelines.ItcastTeacherPipeline': 300,
     'scrapy_demo.pipelines.DoubanMoviePipeline': 299,
-    # 'scrapy_demo.pipelines.JDBookPipeline': 298,
+    'scrapy_demo.pipelines.JDBookPipeline': 298,
+    'scrapy_demo.pipelines.JDBookToMongoDBPipeline': 298,
+    'scrapy_demo.pipelines.KuaiDaiLiItem': 298,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

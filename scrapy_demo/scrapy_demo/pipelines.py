@@ -6,9 +6,13 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import os
 import json
+from pymongo import MongoClient
 
 
 class ItcastTeacherPipeline(object):
+    """
+    Itcast 教师信息存储文件管道
+    """
     def __init__(self):
         if "data" not in os.listdir("."):
             os.makedirs("data")
@@ -30,6 +34,9 @@ class ItcastTeacherPipeline(object):
 
 
 class DoubanMoviePipeline(object):
+    """
+    豆瓣排行 250 电影信息存储文件管道
+    """
     def __init__(self):
         if "data" not in os.listdir("."):
             os.makedirs("data")
@@ -51,6 +58,9 @@ class DoubanMoviePipeline(object):
 
 
 class JDBookPipeline(object):
+    """
+    京东图书存储文件管道
+    """
     def __init__(self):
         if "data" not in os.listdir("."):
             os.makedirs("data")
@@ -58,7 +68,8 @@ class JDBookPipeline(object):
 
     def open_spider(self, spider):
         if spider.name == "jd_book":
-            self.file = open("./data/JDBook_category.json", "a", encoding = "utf-8")
+            # self.file = open("./data/JDBook_category.json", "a", encoding = "utf-8")
+            self.file = open("./data/JDBook_book.json", "a", encoding = "utf-8")
 
     def process_item(self, item, spider):
         if spider.name == "jd_book":
@@ -69,3 +80,51 @@ class JDBookPipeline(object):
     def close_spider(self, spider):
         if spider.name == "jd_book":
             self.file.close()
+
+
+class JDBookToMongoDBPipeline(object):
+    """
+    京东图书信息存储 MongoDB 数据库管道
+    """
+    def __init__(self):
+        self.mongo_client = None
+
+    def open_spider(self, spider):
+        if spider.name == "jd_book":
+            self.mongo_client = MongoClient("mongodb://root:q@192.168.159.132:27017")
+
+    def process_item(self, item, spider):
+        if spider.name == "jd_book":
+            book_collection = self.mongo_client["JD"]["book"]
+            book_collection.insert(dict(item))
+        return item
+
+    def close_spider(self, spider):
+        if spider.name == "jd_book":
+            self.mongo_client.close()
+
+
+class KuaiDaiLiItem(object):
+    def __init__(self):
+        if "data" not in os.listdir("."):
+            os.makedirs("data")
+        self.file = None
+        self.mongodb_client = None
+
+    def open_spider(self, spider):
+        if spider.name == "kuaidaili_ip":
+            self.file = open("./data/kuaidaili.json", "a", encoding = "utf-8")
+            self.mongodb_client = MongoClient("mongodb://root:q@192.168.159.132:27017")
+
+    def process_item(self, item, spider):
+        if spider.name == "kuaidaili_ip":
+            item_to_dict = dict(item)
+            self.file.write(json.dumps(item_to_dict, ensure_ascii = False) + "\n")
+            kuaidaili_collection = self.mongodb_client["proxies"]["kuaidaili"]
+            kuaidaili_collection.insert(item_to_dict)
+        return item
+
+    def close_spider(self, spider):
+        if spider.name == "kuaidaili_ip":
+            self.file.close()
+            self.mongodb_client.close()
