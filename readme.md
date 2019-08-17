@@ -21,3 +21,4 @@ ___
 
 > 接触`scrapy`框架
     * [itcast_teacher](scrapy_demo/scrapy_demo/spiders/itcast.py)
+    * [douban_movie](scrapy_demo/scrapy_demo/spiders/douban_movie.py)
