@@ -20,3 +20,4 @@ ___
 * [scrapy](scrapy_demo)
 
 > 接触`scrapy`框架
+    * [itcast_teacher](scrapy_demo/scrapy_demo/spiders/itcast.py)
