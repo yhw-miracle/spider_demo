@@ -14,5 +14,3 @@ scrapy-redis
 scrapy_demo/data
 scrapy_demo/data1
 scrapy_demo/dbs
-
-scrapy_demo/scrapy_demo/spiders/kuaidaili_ip.py
