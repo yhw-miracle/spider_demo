@@ -12,4 +12,8 @@
     * transtype: realtime
     * simple_means_flag: 3
     * sign: 366362.95275
-    * token: {7c3fd99e31f188110574f8090937ae88} ---> regex: token: '(.*)'    
+    * token: {7c3fd99e31f188110574f8090937ae88} ---> regex: token: '(.*)'
+    
+* sign
+    * index_c8a141d.js
+    * public_64cf93b.js
