@@ -17,8 +17,8 @@
 
 ___
 
-* [scrapy](scrapy_demo)
-
 > 接触`scrapy`框架
+
+* [scrapy](scrapy_demo)
     * [itcast_teacher](scrapy_demo/scrapy_demo/spiders/itcast.py)
     * [douban_movie](scrapy_demo/scrapy_demo/spiders/douban_movie.py)
