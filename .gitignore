@@ -1,6 +1,6 @@
 .idea
-object/qiushi/pic/data
-process/login_github/.env
+qiushi/pic/data/pic
+login_github/.env
 
 jinse/jinse_data
 
