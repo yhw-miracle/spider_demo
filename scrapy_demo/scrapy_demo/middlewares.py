@@ -7,7 +7,7 @@
 
 from scrapy import signals
 import random
-from .settings import USER_AGENT_LIST
+from .settings import USER_AGENT_LIST, USER_AGENT
 import base64
 
 

@@ -72,6 +72,8 @@ ITEM_PIPELINES = {
     'scrapy_demo.pipelines.JDBookPipeline': 298,
     'scrapy_demo.pipelines.JDBookToMongoDBPipeline': 298,
     'scrapy_demo.pipelines.KuaiDaiLiItem': 298,
+    'scrapy_demo.pipelines.MyBlogItem': 298,
+    'scrapy_demo.pipelines.Position163Item': 298,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

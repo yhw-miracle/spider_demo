@@ -95,3 +95,48 @@ class KuaiDaiLiItem(scrapy.Item):
     response_speed_from_me = scrapy.Field()
     # 最后自测时间
     verification_time_from_me = scrapy.Field()
+
+
+class MyBlogItem(scrapy.Item):
+    """
+    爬取 yhw-miracle's blog 数据字段
+    """
+    # 文章标题
+    title = scrapy.Field()
+    # 文章链接
+    title_url = scrapy.Field()
+    # 作者
+    author = scrapy.Field()
+    # 发表日期
+    post_date = scrapy.Field()
+    # 文章标签
+    tags = scrapy.Field()
+    # 文章分类
+    category = scrapy.Field()
+
+
+class Position163Item(scrapy.Item):
+    # 职位名称
+    position_name = scrapy.Field()
+    # 职位链接
+    position_url = scrapy.Field()
+    # 所属部门
+    department = scrapy.Field()
+    # 职位类别
+    position_type = scrapy.Field()
+    # 工作类型
+    work_type = scrapy.Field()
+    # 工作地点
+    location = scrapy.Field()
+    # 招聘人数
+    number = scrapy.Field()
+    # 发布时间
+    publish_date = scrapy.Field()
+    # 学历
+    education = scrapy.Field()
+    # 工作年限
+    work_time = scrapy.Field()
+    # 岗位描述
+    description = scrapy.Field()
+    # 岗位要求
+    requirement = scrapy.Field()

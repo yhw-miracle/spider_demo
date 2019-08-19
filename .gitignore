@@ -14,3 +14,6 @@ scrapy-redis
 scrapy_demo/data
 scrapy_demo/data1
 scrapy_demo/dbs
+
+scrapy_demo/scrapy_demo/spiders/hr_163.py
+scrapy_demo/scrapy_demo/spiders/github.py
