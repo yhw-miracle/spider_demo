@@ -159,6 +159,36 @@ class MyBlogItem(object):
             self.mongodb_client.close()
 
 
+class MyBlogCrawlItem(object):
+    """
+    yhw-miracle's blog 文章数据管道
+    crawl template
+    """
+    def __init__(self):
+        if "data" not in os.listdir("."):
+            os.makedirs("data")
+        self.file = None
+        self.mongodb_client = None
+
+    def open_spider(self, spider):
+        if spider.name == "myblog_crawl":
+            self.file = open("./data/myblog.json", "a", encoding = "utf-8")
+            self.mongodb_client = MongoClient("mongodb://root:q@192.168.159.132:27017")
+
+    def process_item(self, item, spider):
+        if spider.name == "myblog_crawl":
+            item_to_dict = dict(item)
+            self.file.write(json.dumps(item_to_dict, ensure_ascii = False) + "\n")
+            myblog_collection = self.mongodb_client["myblog"]["post_list"]
+            myblog_collection.insert(item_to_dict)
+        return item
+
+    def close_spider(self, spider):
+        if spider.name == "myblog_crawl":
+            self.file.close()
+            self.mongodb_client.close()
+
+
 class Position163Item(object):
     """
     网易招聘信息数据管道

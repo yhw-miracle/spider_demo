@@ -65,7 +65,6 @@ DOWNLOADER_MIDDLEWARES = {
 # }
 
 # Configure item pipelines
-# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'scrapy_demo.pipelines.ItcastTeacherPipeline': 300,
     'scrapy_demo.pipelines.DoubanMoviePipeline': 299,
@@ -73,8 +72,10 @@ ITEM_PIPELINES = {
     'scrapy_demo.pipelines.JDBookToMongoDBPipeline': 298,
     'scrapy_demo.pipelines.KuaiDaiLiItem': 298,
     'scrapy_demo.pipelines.MyBlogItem': 298,
+    'scrapy_demo.pipelines.MyBlogCrawlItem': 298,
     'scrapy_demo.pipelines.Position163Item': 298,
 }
+# See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
