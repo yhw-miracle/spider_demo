@@ -56,6 +56,10 @@ DOWNLOAD_DELAY = 3
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'scrapy_demo.middlewares.UserAgentDownloaderMiddleware': 543,
+
+    # 'scrapy_splash.SplashCookiesMiddleware': 723,
+    # 'scrapy_splash.SplashMiddleware': 725,
+    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
 # Enable or disable extensions
@@ -97,3 +101,13 @@ ITEM_PIPELINES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# # 渲染服务的url
+# SPLASH_URL = 'http://192.168.159.132:8050'
+# # # 下载器中间件
+# #
+# # # 去重过滤器
+# DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+# # # 使用Splash的Http缓存
+# HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
